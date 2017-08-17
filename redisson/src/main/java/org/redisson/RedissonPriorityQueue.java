@@ -123,13 +123,6 @@ public class RedissonPriorityQueue<V> extends RedissonList<V> implements RPriori
             if (comparatorSign != null) {
                 String[] parts = comparatorSign.split(":");
                 String className = parts[0];
-                String sign = parts[1];
-
-                String result = calcClassSign(className);
-                if (!result.equals(sign)) {
-                    throw new IllegalStateException("Local class signature of " + className + " differs from used by this SortedSet!");
-                }
-
                 Class<?> clazz = Class.forName(className);
                 comparator = (Comparator<V>) clazz.newInstance();
             }
